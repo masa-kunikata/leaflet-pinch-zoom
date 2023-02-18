@@ -11,7 +11,7 @@ export default {
 
 <script setup>
 import { nextTick, onMounted } from '@vue/runtime-core';
-import { tileLayer, map } from 'leaflet'
+import { tileLayer, map, CRS } from 'leaflet'
 // import { tileLayer, latLng, control, marker, icon, divIcon, LatLngBounds, Map, MapOptions } from 'leaflet'
 
 onMounted(async() => {
@@ -19,11 +19,12 @@ onMounted(async() => {
 
   // Initialize the map
   var _map = map('map', {
-    scrollWheelZoom: false
+    crs: CRS.Simple,
   });
 
   // Set the position and zoom level of the map
-  _map.setView([47.70, 13.35], 7);
+  // _map.setView([47.70, 13.35], 7);
+  _map.setView([0, 0], 1);
 
   // Initialize the base layer
   tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -39,6 +40,6 @@ onMounted(async() => {
 #map
 {
     width: auto;
-    height: 500px;
+    height: 90vh;
 }
 </style>
