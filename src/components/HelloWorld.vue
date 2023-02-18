@@ -2,8 +2,8 @@
   <div id="map">
   </div>
   <div class="log">
-    <div v-for="(log, idx) in logs" :key="idx">
-      {{ idx }}, {{ log }}
+    <div v-for="(aLog, idx) in logs" :key="idx">
+      {{ idx }}, {{ aLog }}
     </div>
   </div>
 </template>
@@ -33,6 +33,7 @@ onMounted(async() => {
   var _map = map('map', {
     crs: CRS.Simple,
     scrollWheelZoom: false,
+    minZoom: -0.8,
 
     touchZoom: false,
     touchZoom_custom: true,
@@ -50,7 +51,8 @@ onMounted(async() => {
 
   // Initialize the base layer
   tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
+    maxZoom: 3,
+    minZoom: -0.8,
     attribution: '&copy; OSM Mapnik <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(_map);
 })
