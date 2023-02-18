@@ -20,11 +20,21 @@ onMounted(async() => {
   // Initialize the map
   var _map = map('map', {
     crs: CRS.Simple,
+    scrollWheelZoom: false,
+
+    touchZoom: false,
+    touchZoom_custom: true,
   });
 
   // Set the position and zoom level of the map
-  // _map.setView([47.70, 13.35], 7);
   _map.setView([0, 0], 1);
+
+  console.log({touchZoomHandlerEnabled: _map.touchZoom.enabled()})
+  console.log({touchZoom_customHandler: _map.touchZoom_custom.enabled()})
+  // _map.touchZoom.disable() // dynamic toggle
+  // _map.touchZoom.enable() // dynamic toggle
+  // console.log({touchZoomHandlerEnabled: _map.touchZoom.enabled()})
+
 
   // Initialize the base layer
   tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
