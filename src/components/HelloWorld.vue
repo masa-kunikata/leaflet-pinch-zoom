@@ -25,6 +25,9 @@ const store = useStore()
 const logs = computed(() => {
   return store.getters.logs
 })
+const log = (msg) => {
+  store.commit('addLog', msg)
+}
 
 onMounted(async() => {
   await nextTick()
@@ -61,6 +64,11 @@ onMounted(async() => {
     minZoom: -0.8,
     attribution: '&copy; OSM Mapnik <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(_map);
+
+  _map.on("zoomend", () => {
+    const zoom =_map.getZoom() 
+    log(`zoom: ${zoom}`)
+  })
 })
 </script>
 
