@@ -1,4 +1,6 @@
-# leaflet-zoom
+# leaflet-pinch-zoom
+
+[https://masa-kunikata.github.io/leaflet-pinch-zoom/#/](https://masa-kunikata.github.io/leaflet-pinch-zoom/#/)
 
 ## Project setup
 ```

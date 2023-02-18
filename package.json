@@ -1,5 +1,5 @@
 {
-  "name": "leaflet-zoom",
+  "name": "leaflet-pinch-zoom",
   "version": "0.1.0",
   "private": true,
   "scripts": {
