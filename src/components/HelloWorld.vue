@@ -1,6 +1,10 @@
 <template>
   <div id="map">
   </div>
+  <button type="button" @click="increment">increment</button>
+  <div class="log">
+    {{ count }}
+  </div>
 </template>
 
 <script>
@@ -10,9 +14,19 @@ export default {
 </script>
 
 <script setup>
+import { computed } from "vue"
+import { useStore } from "vuex"
 import { nextTick, onMounted } from '@vue/runtime-core';
 import { tileLayer, map, CRS } from 'leaflet'
 // import { tileLayer, latLng, control, marker, icon, divIcon, LatLngBounds, Map, MapOptions } from 'leaflet'
+
+const store = useStore()
+const count = computed(() => {
+  return store.getters.count
+})
+const increment = () => {
+  store.commit('increment')
+}
 
 onMounted(async() => {
   await nextTick()
@@ -49,7 +63,11 @@ onMounted(async() => {
 
 #map
 {
-    width: auto;
-    height: 90vh;
+  width: auto;
+  height: 70vh;
+}
+.log{
+  width: auto;
+  height: 25vh;
 }
 </style>
