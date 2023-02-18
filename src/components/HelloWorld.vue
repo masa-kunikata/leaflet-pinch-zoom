@@ -28,6 +28,10 @@ const logs = computed(() => {
 
 onMounted(async() => {
   await nextTick()
+  const wholeBounds = [
+    [-240/2, 240/2],
+    [0, 0],
+  ];
 
   // Initialize the map
   var _map = map('map', {
@@ -35,12 +39,14 @@ onMounted(async() => {
     scrollWheelZoom: false,
     minZoom: -0.8,
 
+    maxBounds: wholeBounds,
+
     touchZoom: false,
     touchZoom_custom: true,
   });
 
   // Set the position and zoom level of the map
-  _map.setView([0, 0], 1);
+  _map.setView([-120, 120], -0.5);
 
   console.log({touchZoomHandlerEnabled: _map.touchZoom.enabled()})
   console.log({touchZoom_customHandler: _map.touchZoom_custom.enabled()})
