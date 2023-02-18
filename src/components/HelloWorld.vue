@@ -1,9 +1,10 @@
 <template>
   <div id="map">
   </div>
-  <button type="button" @click="increment">increment</button>
   <div class="log">
-    {{ count }}
+    <div v-for="(log, idx) in logs" :key="idx">
+      {{ idx }}, {{ log }}
+    </div>
   </div>
 </template>
 
@@ -21,12 +22,9 @@ import { tileLayer, map, CRS } from 'leaflet'
 // import { tileLayer, latLng, control, marker, icon, divIcon, LatLngBounds, Map, MapOptions } from 'leaflet'
 
 const store = useStore()
-const count = computed(() => {
-  return store.getters.count
+const logs = computed(() => {
+  return store.getters.logs
 })
-const increment = () => {
-  store.commit('increment')
-}
 
 onMounted(async() => {
   await nextTick()

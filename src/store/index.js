@@ -1,17 +1,16 @@
 import { createStore } from 'vuex'
 
 export const store = createStore({
-  state () {
-    return {
-      count: 0
-    }
-  },
+  state: () => ({
+    logs: [],
+  }),
   getters: {
-    count: state => (state.count)
+    logs: state => (state.logs)
   },
   mutations: {
-    increment (state) {
-      state.count++
+    addLog(state, log){
+      const added = [log, ...state.logs]
+      state.logs = added.slice(0, 30)
     }
   }
 })

@@ -5,6 +5,11 @@
 // import Browser from '../../core/Browser.js';
 
 import {Map, Handler, DomEvent, Util, Browser} from 'leaflet'
+import { store } from "@/store";
+
+const log = (message) => {
+  store.commit('addLog', message)
+}
 
 /*
  * L.Handler.TouchZoom_custom is used by L.Map to add pinch zoom on supported mobile browsers.
@@ -39,7 +44,7 @@ export const TouchZoom_custom = Handler.extend({
   },
 
   _onTouchStart(e) {
-    console.log("_onTouchStart")
+    log("_onTouchStart start")
     const map = this._map;
     if (!e.touches || e.touches.length !== 2 || map._animatingZoom || this._zooming) { return; }
 
@@ -64,10 +69,11 @@ export const TouchZoom_custom = Handler.extend({
     DomEvent.on(document, 'touchend touchcancel', this._onTouchEnd, this);
 
     DomEvent.preventDefault(e);
+    log("_onTouchStart end")
   },
 
   _onTouchMove(e) {
-    console.log("_onTouchMove")
+    log("_onTouchMove start")
     if (!e.touches || e.touches.length !== 2 || !this._zooming) { return; }
 
     const map = this._map,
@@ -104,10 +110,11 @@ export const TouchZoom_custom = Handler.extend({
     this._animRequest = Util.requestAnimFrame(moveFn, this, true);
 
     DomEvent.preventDefault(e);
+    log("_onTouchMove end")
   },
 
   _onTouchEnd() {
-    console.log("_onTouchEnd")
+    log("_onTouchEnd start")
     if (!this._moved || !this._zooming) {
       this._zooming = false;
       return;
@@ -121,12 +128,13 @@ export const TouchZoom_custom = Handler.extend({
 
     // Pinch updates GridLayers' levels only when zoomSnap is off, so zoomSnap becomes noUpdate.
     if (this._map.options.zoomAnimation) {
-      console.log("_animateZoom")
+      log("_animateZoom")
       this._map._animateZoom(this._center, this._map._limitZoom(this._zoom), true, this._map.options.zoomSnap);
     } else {
-      console.log("_resetView")
+      log("_resetView")
       this._map._resetView(this._center, this._map._limitZoom(this._zoom));
     }
+    log("_onTouchEnd end")
   }
 });
 
