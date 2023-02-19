@@ -83,5 +83,6 @@ onMounted(async() => {
 .log{
   width: auto;
   height: 25vh;
+  overflow-y: scroll;
 }
 </style>
