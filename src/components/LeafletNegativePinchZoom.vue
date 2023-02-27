@@ -21,25 +21,23 @@ const currentZoom = ref(0)
 onMounted(async() => {
   await nextTick()
 
+  const maxBounds = [
+    [0, 0],
+    [-256, 256],
+  ]
+
   // Initialize the map
   const _map = map('map', {
     crs: CRS.Simple,
-    maxBounds: [
-      [0, 0],
-      [-256, 256],
-    ],
+    maxBounds,
     
     touchZoom: true,
-
     scrollWheelZoom: false,
   })
 
-  // Set the position and zoom level of the map
-  _map.setView([0, 0], currentZoom.value)
-
   // Initialize the base layer
   tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 10,
+    maxZoom: 5,
     minZoom: -0.8,
     attribution: '&copy; OSM Mapnik <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(_map)
@@ -47,6 +45,9 @@ onMounted(async() => {
   _map.on("zoomend", () => {
     currentZoom.value = _map.getZoom() 
   })
+
+  // Set the initial position
+  _map.fitBounds(maxBounds)
 })
 </script>
 
