@@ -1,17 +1,13 @@
 <template>
-  <HelloWorld/>
+  <LeafletNegativePinchZoom/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
 }
 </script>
 
-<style>
-</style>
+<script setup>
+import LeafletNegativePinchZoom from './components/LeafletNegativePinchZoom.vue'
+</script>
